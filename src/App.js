@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import RecipesList from './components/recipelist'
+import RecipesList from './components/recipelist';
+import Modal from './components/modal';
 
 const defaultRecipes = [
   {title: 'Pumpkin Pie', ingredients: ['Pumpkin puree', 'Sweetened Condensed Milk', 'Eggs', 'Pumpkin Pie Spice', 'Pie Crust']},
@@ -11,9 +12,25 @@ const defaultRecipes = [
 
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      recipes: defaultRecipes,
+      isModalOpen: true
+    }
+  }
+
+  closeModal(){
+    this.setState({isModalOpen: false})
+    console.log('Modal is closed')
+  }
+
   render() {
     return (
+    <div>
       <RecipesList recipes={defaultRecipes} />
+      <Modal modalTitle="Add recipe" buttonOption="Add" handleClose={this.closeModal.bind(this)} modalState={this.state.isModalOpen}/>
+    </div>
     );
   }
 }
