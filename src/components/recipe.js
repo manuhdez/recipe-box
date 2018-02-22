@@ -4,7 +4,7 @@ import Button from './button.js';
 export default class Recipe extends Component {
   render() {
     return (
-      <details id={this.props.id}>
+      <details>
         <summary>{this.props.title}</summary>
         <header>
           <h2>Ingredients</h2>
@@ -14,8 +14,8 @@ export default class Recipe extends Component {
             this.props.ingredients.map( item => {return <li>{item}</li> })
           }
         </ul>
-        <Button text="Delete" handleClick={this.props.handleRemove} />
-        <Button text="Edit" handleClick={this.props.handleEditRecipe} />
+        <Button id={this.props.id} color={{background: "#d9534f" }} text="Delete" handleClick={this.props.handleRemove} />
+        <Button id={this.props.id} color={{background: "#ddd" }} text="Edit" handleClick={this.props.handleEditRecipe} />
       </details>
     )
   }
