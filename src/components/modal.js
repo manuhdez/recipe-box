@@ -42,7 +42,7 @@ export default class Modal extends React.Component {
             </label>
           </form>
           <Button text={this.props.btnText} color={{background: '#337ab7'}} />
-          <Button text="Cancel" color={{background: '#d9534f'}}/>
+          <Button text="Cancel" color={{background: '#d9534f'}} handleClick={this.props.handleClose} />
         </div>
         <div style={backdropStyle} onClick={this.props.handleClose} />
       </div>

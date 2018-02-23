@@ -16,7 +16,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       recipes: defaultRecipes,
-      isModalOpen: true,
+      isModalOpen: false,
       modalTitle: "",
       modalBtnText: "Add recipe",
       inputRecipe: "",
@@ -25,7 +25,41 @@ export default class App extends React.Component {
     }
   }
 
-  closeModal(){
+  handleChange(event) {
+    const itemChanged = event.target.name;
+    if (itemChanged === "inputRecipe") {
+      this.setState({inputRecipe: event.target.value})
+    } else if (itemChanged === "inputIngredients") {
+      const ingredientsArray = event.target.value.split(',');
+      this.setState({inputIngredients: ingredientsArray})
+    }
+  }
+
+  openModal(e) {
+    const text = e.target.innerHTML;
+    const editIndex = parseInt(e.target.id);
+
+    if (text === "Add recipe") {
+      this.setState({
+        isModalOpen: true,
+        modalTitle: "Add a recipe",
+        modalBtnText: text
+      })
+    } else if (text === "Edit") {
+      let inputTitle = this.state.recipes[editIndex].title;
+      let inputContent = this.state.recipes[editIndex].ingredients.join(',');
+      this.setState({
+        isModalOpen: true,
+        modalTitle: "Edit recipe",
+        modalBtnText: "Save changes",
+        inputRecipe: inputTitle,
+        inputIngredients: inputContent,
+        currentRecipe: editIndex
+      })
+    }
+  }
+
+  closeModal() {
     this.setState({
       isModalOpen: false,
       inputRecipe: "",
@@ -37,7 +71,7 @@ export default class App extends React.Component {
   render() {
     return (
     <div>
-      <RecipesList recipes={defaultRecipes} />
+      <RecipesList recipes={defaultRecipes} handleOpen={this.openModal.bind(this)} />
       <Modal modalTitle="Add recipe" btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
     </div>
     );
