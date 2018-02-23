@@ -16,7 +16,8 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       recipes: defaultRecipes,
-      isModalOpen: true
+      isModalOpen: true,
+      modalBtnText: "Add recipe"
     }
   }
 
@@ -29,7 +30,7 @@ export default class App extends React.Component {
     return (
     <div>
       <RecipesList recipes={defaultRecipes} />
-      <Modal modalTitle="Add recipe" buttonOption="Add" handleClose={this.closeModal.bind(this)} modalState={this.state.isModalOpen}/>
+      <Modal modalTitle="Add recipe" btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
     </div>
     );
   }

@@ -3,7 +3,7 @@ import Button from './button';
 
 export default class Modal extends React.Component {
   render() {
-    if (this.props.isOpen === false)
+    if (this.props.isModalOpen === false)
       return null
 
     let modalStyle = {
@@ -26,22 +26,26 @@ export default class Modal extends React.Component {
     }
 
     return (
-      <div modalState={this.props.modalState}>
+      <div isModalOpen={this.props.isModalOpen}>
         <div style={modalStyle} className="modal">
-          <h3>{this.props.modalTitle}</h3>
-          <Button text={this.props.buttonOption} color={{background: 'blue'}} />
-          <Button text="Cancel" color={{background: 'red'}}/>
+          <h2>{this.props.modalTitle}</h2><a href="#" onClick={this.props.handleClose}>x</a>
+          <form>
+            <label>Recipe name
+              <input type='text' name="inputRecipe"
+                value={this.props.inputRecipe}
+                onChange={this.props.handleChange}/>
+            </label>
+            <label>Ingredients
+              <textarea name="inputIngredients"
+                onChange={this.props.handleChange}
+                value={this.props.inputIngredients}/>
+            </label>
+          </form>
+          <Button text={this.props.btnText} color={{background: '#337ab7'}} />
+          <Button text="Cancel" color={{background: '#d9534f'}}/>
         </div>
         <div style={backdropStyle} onClick={this.props.handleClose} />
       </div>
     )
-  }
-
-  close(e) {
-    e.preventDefault()
-
-    if (this.props.modalState) {
-      this.props.handleClose(e)
-    }
   }
 }
