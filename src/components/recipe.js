@@ -11,7 +11,7 @@ export default class Recipe extends Component {
         </header>
         <ul>
           {
-            this.props.ingredients.map( item => {return <li>{item}</li> })
+            this.props.ingredients.map( (item, key) => {return <li key={key}>{item}</li> })
           }
         </ul>
         <Button id={this.props.id} color={{background: "#d9534f" }} text="Delete" handleClick={this.props.handleRemove} />

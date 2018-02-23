@@ -26,7 +26,7 @@ export default class Modal extends React.Component {
     }
 
     return (
-      <div isModalOpen={this.props.isModalOpen}>
+      <div ismodalopen={this.props.isModalOpen.toString()}>
         <div style={modalStyle} className="modal">
           <h2>{this.props.modalTitle}</h2><a href="#" onClick={this.props.handleClose}>x</a>
           <form>

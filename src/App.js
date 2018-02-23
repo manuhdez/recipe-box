@@ -4,7 +4,7 @@ import './App.css';
 import RecipesList from './components/recipelist';
 import Modal from './components/modal';
 
-const defaultRecipes = [
+let defaultRecipes = [
   {title: 'Pumpkin Pie', ingredients: ['Pumpkin puree', 'Sweetened Condensed Milk', 'Eggs', 'Pumpkin Pie Spice', 'Pie Crust']},
   {title: 'Spaghetti', ingredients: ['Noodles', 'Tomato Sauce', '(Optional) Meatballs']},
   {title: 'Onion Pie', ingredients: ['Onion', 'Pie Crust']}
@@ -68,11 +68,13 @@ export default class App extends React.Component {
   }
 
   removeRecipe(e) {
-    const recipesCopy = this.state.recipes.slice();
+    let recipesCopy = this.state.recipes.slice();
     const recipeIndex = parseInt(e.target.id);
-    recipesCopy.slice(recipeIndex, 1);
-    this.setState({recipes: recipesCopy})
-    console.log("Item removed")
+    recipesCopy.splice(recipeIndex, 1);
+
+    defaultRecipes = recipesCopy;
+
+    this.setState({recipes: defaultRecipes})
   }
 
   render() {
