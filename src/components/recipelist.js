@@ -7,8 +7,8 @@ export default class RecipesList extends Component {
     return (
       <div>
         {
-          this.props.recipes.map( (recipe, index) => { return <Recipe key={index} title={recipe.title} ingredients={recipe.ingredients}
-          handleEditRecipe={this.props.handleEditRecipe} handleRemove={this.props.handleRemove} /> })
+          this.props.recipes.map( (recipe, index) => { return <Recipe id={index} title={recipe.title} ingredients={recipe.ingredients}
+          handleEditRecipe={this.props.handleEditRecipe} handleRemove={this.props.handleRemove} handleClick={this.props.handleOpen} /> })
         }
         <Button id="add-recipe-btn" text="Add recipe" color={{background: "#337ab7"}} handleClick={this.props.handleOpen} />
       </div>

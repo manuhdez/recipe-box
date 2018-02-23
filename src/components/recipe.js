@@ -15,7 +15,7 @@ export default class Recipe extends Component {
           }
         </ul>
         <Button id={this.props.id} color={{background: "#d9534f" }} text="Delete" handleClick={this.props.handleRemove} />
-        <Button id={this.props.id} color={{background: "#ddd" }} text="Edit" handleClick={this.props.handleEditRecipe} />
+        <Button id={this.props.id} color={{background: "#ddd" }} text="Edit" handleClick={this.props.handleClick} />
       </details>
     )
   }

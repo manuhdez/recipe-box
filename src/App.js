@@ -18,7 +18,7 @@ export default class App extends React.Component {
       recipes: defaultRecipes,
       isModalOpen: false,
       modalTitle: "",
-      modalBtnText: "Add recipe",
+      modalBtnText: "",
       inputRecipe: "",
       inputIngredients: "",
       currentRecipe: ""
@@ -42,7 +42,7 @@ export default class App extends React.Component {
     if (text === "Add recipe") {
       this.setState({
         isModalOpen: true,
-        modalTitle: "Add a recipe",
+        modalTitle: "Add new recipe",
         modalBtnText: text
       })
     } else if (text === "Edit") {
@@ -65,14 +65,15 @@ export default class App extends React.Component {
       inputRecipe: "",
       inputIngredients: ""
     })
-    console.log('Modal is closed')
   }
+
+  removeRecipe() {}
 
   render() {
     return (
     <div>
       <RecipesList recipes={defaultRecipes} handleOpen={this.openModal.bind(this)} />
-      <Modal modalTitle="Add recipe" btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
+      <Modal modalTitle={this.state.modalTitle} btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
     </div>
     );
   }
