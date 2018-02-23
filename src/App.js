@@ -17,12 +17,20 @@ export default class App extends React.Component {
     this.state = {
       recipes: defaultRecipes,
       isModalOpen: true,
-      modalBtnText: "Add recipe"
+      modalTitle: "",
+      modalBtnText: "Add recipe",
+      inputRecipe: "",
+      inputIngredients: "",
+      currentRecipe: ""
     }
   }
 
   closeModal(){
-    this.setState({isModalOpen: false})
+    this.setState({
+      isModalOpen: false,
+      inputRecipe: "",
+      inputIngredients: ""
+    })
     console.log('Modal is closed')
   }
 
