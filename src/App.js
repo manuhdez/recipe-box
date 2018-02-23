@@ -67,12 +67,18 @@ export default class App extends React.Component {
     })
   }
 
-  removeRecipe() {}
+  removeRecipe(e) {
+    const recipesCopy = this.state.recipes.slice();
+    const recipeIndex = parseInt(e.target.id);
+    recipesCopy.slice(recipeIndex, 1);
+    this.setState({recipes: recipesCopy})
+    console.log("Item removed")
+  }
 
   render() {
     return (
     <div>
-      <RecipesList recipes={defaultRecipes} handleOpen={this.openModal.bind(this)} />
+      <RecipesList recipes={defaultRecipes} handleOpen={this.openModal.bind(this)} handleRemove={this.removeRecipe.bind(this)} />
       <Modal modalTitle={this.state.modalTitle} btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
     </div>
     );
