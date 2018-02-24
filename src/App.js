@@ -77,11 +77,50 @@ export default class App extends React.Component {
     this.setState({recipes: defaultRecipes})
   }
 
+  modifyRecipesList() {
+    const currentRecipe = this.state.currentRecipe;
+
+    if (this.state.modalBtnText === "Save changes") {
+      const recipesCopy = this.state.recipes.slice();
+      let newRecipe = {};
+      newRecipe.title = this.state.inputRecipe
+      newRecipe.ingredients = this.state.inputIngredients
+      recipesCopy[currentRecipe] = newRecipe
+      defaultRecipes = recipesCopy;
+
+      this.setState({recipes: recipesCopy, currentRecipe: ""})
+      this.closeModal();
+
+    } else if (this.state.modalTitle === "Add new recipe") {
+      const recipesCopy = this.state.recipes.slice();
+      recipesCopy.push({title: this.state.inputRecipe, ingredients: this.state.inputIngredients})
+      defaultRecipes = recipesCopy;
+
+      if (this.state.inputRecipe !== "") {
+        this.setState({recipes: recipesCopy})
+        this.closeModal();
+      }
+    }
+  }
+
   render() {
     return (
     <div>
-      <RecipesList recipes={defaultRecipes} handleOpen={this.openModal.bind(this)} handleRemove={this.removeRecipe.bind(this)} />
-      <Modal modalTitle={this.state.modalTitle} btnText={this.state.modalBtnText} handleClose={this.closeModal.bind(this)} isModalOpen={this.state.isModalOpen}/>
+      <RecipesList
+        recipes={defaultRecipes}
+        handleOpen={this.openModal.bind(this)}
+        handleRemove={this.removeRecipe.bind(this)}
+      />
+      <Modal
+        modalTitle={this.state.modalTitle}
+        btnText={this.state.modalBtnText}
+        inputRecipe={this.state.inputRecipe}
+        inputIngredients={this.state.inputIngredients}
+        handleClose={this.closeModal.bind(this)}
+        handleChange={this.handleChange.bind(this)}
+        handleRecipes={this.modifyRecipesList.bind(this)}
+        isModalOpen={this.state.isModalOpen}
+      />
     </div>
     );
   }

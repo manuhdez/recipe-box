@@ -1,0 +1,103 @@
+//FONT
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab')
+
+//COLORS
+$green-bg: #dff0d8
+$green-text: #3c763d
+$green-hover: #cbefbd
+$primary: #337ab7
+$secondary: #d9534f
+
+//Mini reset
+*
+  box-sizing: border-box
+  font-family: 'Roboto slab'
+
+//COMPONENTS STYLING
+#recipe-list
+    background: #f5f5f5
+    border: 1px solid #dddddd
+    border-radius: 5px
+    padding: 10px
+
+details
+    background: #ffffff
+    &:hover summary
+        background: $green-hover
+    &[open] summary
+        background: $green-hover
+
+summary
+    background: $green-bg
+    color: $green-text
+    text-transform: uppercase
+    font-weight: 600
+    cursor: pointer
+    padding: 15px
+    border-radius: 5px
+    margin-bottom: 5px
+    margin-top: 5px
+    outline: none
+
+h2
+    text-align: center
+
+ul
+    border: 2px solid #eeeeee
+    border-radius: 3px
+    margin: 0 10px
+    padding: 0
+    li
+        height: 40px
+        padding-left: 15px
+        list-style: none
+        display: flex
+        align-items: center
+        border-bottom: 1px solid #eeeeee
+        &:last-child
+            border: none
+
+button
+    cursor: pointer
+    font-size: 1rem
+
+label
+    input
+        width: 100%
+        height: 30px
+        margin-top: 5px
+        margin-bottom: 10px
+    textarea
+        width: 100%
+        height: 85px
+        resize: none
+        margin-top: 5px
+        margin-bottom: 10px
+        border: 1px solid #dddddd
+
+.modal
+    max-width: 500px
+    min-width: 350px
+    min-height: 300px
+    border-radius: 5px
+    padding: 0 20px 10px 20px
+    a
+        position: absolute
+        top: 25px
+        right: 30px
+        font-size: 1.25rem
+        font-family: sans-serif
+        text-decoration: none
+        color: #dddddd
+        &:hover
+            color: #aaaaaa
+
+//Media queries
+@media screen and (min-width: 700px)
+    #recipe-list
+        width: 75%
+        margin: 0 auto
+
+@media screen and (min-width: 1350px)
+    #recipe-list
+        width: 60%
