@@ -4,11 +4,17 @@ import './App.css';
 import RecipesList from './components/recipelist';
 import Modal from './components/modal';
 
-let defaultRecipes = [
+let recipes = [
   {title: 'Pumpkin Pie', ingredients: ['Pumpkin puree', 'Sweetened Condensed Milk', 'Eggs', 'Pumpkin Pie Spice', 'Pie Crust']},
   {title: 'Spaghetti', ingredients: ['Noodles', 'Tomato Sauce', '(Optional) Meatballs']},
   {title: 'Onion Pie', ingredients: ['Onion', 'Pie Crust']}
 ];
+
+let defaultRecipes = JSON.parse(localStorage.getItem("defaultRecipes"));
+if (defaultRecipes == null) {
+  localStorage.setItem("defaultRecipes", JSON.stringify(recipes));
+  let defaultRecipes = JSON.parse(localStorage.getItem("defaultRecipes"));
+}
 
 
 export default class App extends React.Component {
@@ -37,7 +43,7 @@ export default class App extends React.Component {
 
   openModal(e) {
     const text = e.target.innerHTML;
-    const editIndex = parseInt(e.target.id);
+    const editIndex = parseInt(e.target.id, "decimal");
 
     if (text === "Add recipe") {
       this.setState({
@@ -69,12 +75,12 @@ export default class App extends React.Component {
 
   removeRecipe(e) {
     let recipesCopy = this.state.recipes.slice();
-    const recipeIndex = parseInt(e.target.id);
+    const recipeIndex = parseInt(e.target.id, "decimal");
     recipesCopy.splice(recipeIndex, 1);
 
-    defaultRecipes = recipesCopy;
-
-    this.setState({recipes: defaultRecipes})
+    recipes = recipesCopy;
+    localStorage.setItem("defaultRecipes", JSON.stringify(recipesCopy))
+    this.setState({recipes: recipes})
   }
 
   modifyRecipesList() {
@@ -86,16 +92,16 @@ export default class App extends React.Component {
       newRecipe.title = this.state.inputRecipe
       newRecipe.ingredients = this.state.inputIngredients
       recipesCopy[currentRecipe] = newRecipe
-      defaultRecipes = recipesCopy;
-
-      this.setState({recipes: recipesCopy, currentRecipe: ""})
+      recipes = recipesCopy;
+      localStorage.setItem("defaultRecipes", JSON.stringify(recipesCopy))
+      this.setState({recipes: recipes, currentRecipe: ""})
       this.closeModal();
 
     } else if (this.state.modalTitle === "Add new recipe") {
       const recipesCopy = this.state.recipes.slice();
       recipesCopy.push({title: this.state.inputRecipe, ingredients: this.state.inputIngredients})
-      defaultRecipes = recipesCopy;
-
+      recipes = recipesCopy;
+      localStorage.setItem("defaultRecipes", JSON.stringify(recipesCopy))
       if (this.state.inputRecipe !== "") {
         this.setState({recipes: recipesCopy})
         this.closeModal();
@@ -107,7 +113,7 @@ export default class App extends React.Component {
     return (
     <div>
       <RecipesList
-        recipes={defaultRecipes}
+        recipes={this.state.recipes}
         handleOpen={this.openModal.bind(this)}
         handleRemove={this.removeRecipe.bind(this)}
       />
